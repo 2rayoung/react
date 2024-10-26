@@ -1,36 +1,43 @@
 {
   "expo": {
-    "name": "NewExpoProject",
+    "name": "냉털",
     "slug": "NewExpoProject",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/LOGO4.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/LOGO4.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rayoung.NewExpoProject"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/LOGO4.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rayoung.NewExpoProject"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9c473636-57e8-4e54-afce-4d0f9747bb6d"
+      }
     }
   }
 }
