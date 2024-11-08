@@ -115,7 +115,6 @@ function MainTabs() {
 }
 
 // Main App Component
-// Main App Component in App.js
 export default function App() {
   return (
     <NavigationContainer>

@@ -188,7 +188,7 @@ export default function RecipeDetailScreen({ route }) {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>사용할 재료 목록</Text>
+              <Text style={styles.modalTitle}>사용한 재료 목록</Text>
               <TouchableOpacity style={styles.closeButton} onPress={() => setShowModal(false)}>
                 <Text style={styles.closeButtonText}>X</Text>
               </TouchableOpacity>

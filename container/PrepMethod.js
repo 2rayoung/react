@@ -86,8 +86,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   title: {
     fontSize: 24,

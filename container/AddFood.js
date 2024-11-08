@@ -6,20 +6,28 @@ import API_BASE_URL from '../constants/config';  // 수정된 경로: config.js�
 export default function AddFoodScreen({ route, navigation }) {
   const { extractedText } = route.params || {};  // extractedText 받기
 
-  // extractedText가 제대로 전달되었는지 확인 (디버깅 용)
-  useEffect(() => {
-    console.log('extractedText:', extractedText);  // 추출된 텍스트 로그로 확인
-  }, [extractedText]);
+  // 기본 유통기한을 설정하는 함수 (현재 날짜로부터 일주일 뒤)
+  const getDefaultExpirationDate = () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 7); // 현재 날짜에 7일을 더함
+    return date.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 반환
+  };
 
   const initialFoodItems = Array.isArray(extractedText)
     ? extractedText.map(item => ({
         foodName: item[0],
         quantity: item[1],
         price: item[2],
-        expiryDate: '',
-        storageType: '',
+        expiryDate: getDefaultExpirationDate(), // 기본 유통기한 설정
+        storageType: 'REFRIGERATOR', // 기본 보관 방법 설정
       }))
-    : [{ foodName: '', quantity: '', price: '', expiryDate: '', storageType: '' }];
+    : [{
+        foodName: '',
+        quantity: '',
+        price: '',
+        expiryDate: getDefaultExpirationDate(), // 기본 유통기한 설정
+        storageType: 'REFRIGERATOR', // 기본 보관 방법 설정
+      }];
 
   const [foodItems, setFoodItems] = useState(initialFoodItems);
 
@@ -30,10 +38,18 @@ export default function AddFoodScreen({ route, navigation }) {
   };
 
   const addNewFoodItem = () => {
-    setFoodItems([...foodItems, { foodName: '', quantity: '', expiryDate: '', storageType: '', price: '' }]);
+    setFoodItems([
+      ...foodItems,
+      {
+        foodName: '',
+        quantity: '',
+        price: '',
+        expiryDate: getDefaultExpirationDate(), // 기본 유통기한 설정
+        storageType: 'REFRIGERATOR', // 기본 보관 방법 설정
+      },
+    ]);
   };
 
-  // 항목 삭제 핸들러
   const removeFoodItem = (index) => {
     const updatedItems = [...foodItems];
     updatedItems.splice(index, 1);  // 해당 인덱스의 항목을 삭제
@@ -212,34 +228,33 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 2,
-    position: 'relative',  
+    position: 'relative',
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
-    alignItems: 'center',  // 삭제 버튼과 수량을 수평으로 맞춤
+    alignItems: 'center',
   },
   rowWithDelete: {
     flexDirection: 'row',
-    alignItems: 'center',  // 수량 레이블과 X 버튼을 수평으로 맞춤
+    alignItems: 'center',
   },
   inputContainer: {
     flex: 1,
     marginRight: 8,
   },
-
   deleteButton: {
-    marginLeft: 135, 
-    marginTop: -15, // 수량 레이블과 X 버튼 사이 간격
+    marginLeft: 135,
+    marginTop: -15,
     borderRadius: 12,
     padding: 5,
-    backgroundColor: 'transparent',  // 배경색 제거
+    backgroundColor: 'transparent',
   },
   deleteButtonText: {
-    color: '#333',  // 글자 색상을 검은색으로 설정
+    color: '#333',
     fontSize: 16,
-    lineHeight: 16,  // 글자를 더 위로 올리기 위한 높이 조정
+    lineHeight: 16,
   },
   label: {
     fontSize: 14,
